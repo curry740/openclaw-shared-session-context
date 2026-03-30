@@ -1,0 +1,15 @@
+{
+  "task_id": "cross-channel-default",
+  "title": "跨渠道连续会话",
+  "status": "in_progress",
+  "current_goal": "让多个私聊渠道共享同一工作上下文",
+  "latest_progress": [
+    "已完成共享上下文最小读取链路",
+    "已完成结构化写回"
+  ],
+  "blockers": [
+    "旧 summary 风格不统一"
+  ],
+  "next_step": "清洗 live summary 与 capsule",
+  "updated_at": "2026-03-30T00:00:00+08:00"
+}

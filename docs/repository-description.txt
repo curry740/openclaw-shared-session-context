@@ -1,0 +1,1 @@
+Reusable shared-session continuity layer for OpenClaw bots, with OpenViking-backed reference implementation and thin skill wrapper.

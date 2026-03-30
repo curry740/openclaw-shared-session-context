@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "users": {
+    "alice": {
+      "displayName": "Alice",
+      "channels": {
+        "feishu": { "userId": "ou_xxx" },
+        "qqbot": { "userId": "qq_xxx" }
+      }
+    }
+  }
+}

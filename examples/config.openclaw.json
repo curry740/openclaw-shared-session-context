@@ -1,0 +1,22 @@
+{
+  "sharedSessionContext": {
+    "backend": {
+      "type": "openviking",
+      "root": "$OV_CONTEXT_ROOT"
+    },
+    "identityMap": "$OV_IDENTITY_MAP",
+    "enabledChannels": ["feishu", "qqbot"],
+    "readPriority": [
+      "continuation_capsule",
+      "recent_exchanges",
+      "task_state",
+      "session_summary"
+    ],
+    "writeback": {
+      "summary": true,
+      "task": true,
+      "capsule": false,
+      "exchange": false
+    }
+  }
+}
