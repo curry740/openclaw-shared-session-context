@@ -1,5 +1,7 @@
 # OpenClaw Shared Session Context
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 A bridge layer between `OpenClaw` and `OpenViking` for cross-channel shared session continuity.
 
 This repository is not just an OpenClaw skill and not just a set of hook scripts.
