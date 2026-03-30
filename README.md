@@ -8,7 +8,7 @@ This repository turns cross-channel conversation continuity into a reusable laye
 
 When one user talks to the same bot from different channels, context usually fractures:
 - each channel becomes its own isolated session
-- short prompts like `继续` or `聊到哪儿了` become weak
+- short continuation prompts like `continue` or `where were we` become weak
 - active task state drifts apart
 
 ## Solution
@@ -78,11 +78,6 @@ A thin OpenClaw skill wrapper is included under `skill/shared-session-context` a
 - publish this repo as the protocol + reference implementation
 - publish the skill as the OpenClaw-facing wrapper
 - version the skill against tagged releases of this repo
-
-## License
-
-MIT
-releases of this repo
 
 ## License
 
