@@ -31,12 +31,14 @@ Expected result:
 After generating a reply and producing structured summary/task artifacts, call:
 
 ```bash
-scripts/after-answer.sh <channel> <channel_user_id> <topic> <task_id> <summary_file> <task_json_file>
+scripts/after-answer.sh <channel> <channel_user_id> <topic> <task_id> <summary_file> <task_json_file> [exchange_id] [exchange_json_file]
 ```
 
 Expected result:
 - store `session_summary`
 - store `task_state`
+- optionally store semantic `recent_exchange`
+- optionally regenerate `continuation_capsule`
 
 ## 4. Smoke test
 

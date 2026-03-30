@@ -19,6 +19,15 @@ How many recent exchanges to consider.
 ### `OV_RECENT_MAX_CHARS`
 Character budget for `recent_exchanges` injection.
 
+### Exchange writeback inputs
+If you want the full continuation chain, also pass these optional arguments into `scripts/after-answer.sh`:
+- `exchange_id`
+- `exchange_json_file`
+
+That enables:
+- semantic exchange writeback
+- continuation capsule regeneration
+
 ## Identity Map Shape
 
 See `examples/identity-map.json`.

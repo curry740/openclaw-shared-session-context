@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1
+
+- upgrade the reference scripts from minimal placeholders into a usable read/write chain
+- add semantic exchange writeback and continuation capsule regeneration
+- add demo and production-hardening docs
+- add example summary and exchange payloads
+- improve after-answer writeback gating and recent-exchange selection
+
 ## 0.1.0
 
 - define the first reusable shared-session protocol for OpenClaw bots

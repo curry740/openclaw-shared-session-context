@@ -15,20 +15,21 @@ ROOT="${OV_CONTEXT_ROOT:-}"
 RECENT_EXCHANGES_SCRIPT="$SCRIPT_DIR/get-recent-exchanges.sh"
 RECENT_LIMIT="${OV_RECENT_LIMIT:-8}"
 RECENT_MAX_CHARS="${OV_RECENT_MAX_CHARS:-4000}"
+CAPSULE_FILE="${ROOT}/capsules/${CANONICAL_USER}/${TOPIC}/continuation-capsule.json"
 
 if [ -z "$ROOT" ] || [ ! -d "$ROOT" ]; then
   echo "OV_CONTEXT_ROOT is not set or directory not found" >&2
   exit 2
 fi
 
-CAPSULE_FILE="${ROOT}/capsules/${CANONICAL_USER}/${TOPIC}/continuation-capsule.json"
-
 query_type() {
-  case "$QUERY" in
-    *continue*|*resume*|*pick up where we left off*) printf 'continuation' ;;
-    *where were we*|*what were we discussing*|*where did we stop*) printf 'recall-summary' ;;
-    *verbatim*|*exact words*|*what did you say exactly*) printf 'recall-verbatim' ;;
-    *blocked*|*next step*|*current progress*) printf 'task-progress' ;;
+  local q
+  q="$(printf '%s' "$QUERY" | tr '[:upper:]' '[:lower:]')"
+  case "$q" in
+    *"what did you say exactly"*|*"exact words"*|*verbatim*) printf 'recall-verbatim' ;;
+    *"where were we"*|*"what were we discussing"*|*"where did we stop"*) printf 'recall-summary' ;;
+    *continue*|*resume*|*"pick up where we left off"*) printf 'continuation' ;;
+    *blocked*|*blocker*|*"next step"*|*"current progress"*) printf 'task-progress' ;;
     *why*|*design*|*architecture*|*principle*) printf 'design-explanation' ;;
     *) printf 'default' ;;
   esac
@@ -58,6 +59,15 @@ print_recent_exchanges() {
   fi
 }
 
+SESSION_DIR="${ROOT}/sessions/${CANONICAL_USER}"
+if [ -n "$TOPIC" ]; then
+  SESSION_FILE="$(latest_file "${SESSION_DIR}/${TOPIC}")"
+else
+  SESSION_FILE="$(latest_file "${SESSION_DIR}")"
+fi
+TASK_FILE="$(latest_file "${ROOT}/tasks/${CANONICAL_USER}")"
+MEMORY_FILE="$(latest_file "${ROOT}/memory/long-term")"
+
 QUERY_TYPE="$(query_type)"
 RECENT_MODE="default"
 RECENT_LIMIT_EFFECTIVE="$RECENT_LIMIT"
@@ -71,17 +81,11 @@ case "$QUERY_TYPE" in
   *) ;;
 esac
 
-SESSION_DIR="${ROOT}/sessions/${CANONICAL_USER}"
-if [ -n "$TOPIC" ]; then
-  SESSION_FILE="$(latest_file "${SESSION_DIR}/${TOPIC}")"
-else
-  SESSION_FILE="$(latest_file "${SESSION_DIR}")"
-fi
-TASK_FILE="$(latest_file "${ROOT}/tasks/${CANONICAL_USER}")"
-
 printf '=== identity ===\n'
 printf 'canonical_user: %s\nchannel: %s\n' "$CANONICAL_USER" "$CHANNEL"
-[ -n "$TOPIC" ] && printf 'topic: %s\n' "$TOPIC"
+if [ -n "$TOPIC" ]; then
+  printf 'topic: %s\n' "$TOPIC"
+fi
 printf 'query_type: %s\n\n' "$QUERY_TYPE"
 
 case "$QUERY_TYPE" in
@@ -91,6 +95,27 @@ case "$QUERY_TYPE" in
     print_block 'task_state' "$TASK_FILE"
     print_block 'session_summary' "$SESSION_FILE"
     ;;
+  recall-summary)
+    print_block 'continuation_capsule' "$CAPSULE_FILE"
+    print_recent_exchanges
+    print_block 'session_summary' "$SESSION_FILE"
+    print_block 'task_state' "$TASK_FILE"
+    ;;
+  recall-verbatim)
+    print_recent_exchanges
+    print_block 'session_summary' "$SESSION_FILE"
+    ;;
+  task-progress)
+    print_block 'task_state' "$TASK_FILE"
+    print_block 'continuation_capsule' "$CAPSULE_FILE"
+    print_recent_exchanges
+    ;;
+  design-explanation)
+    print_block 'session_summary' "$SESSION_FILE"
+    print_block 'task_state' "$TASK_FILE"
+    print_block 'continuation_capsule' "$CAPSULE_FILE"
+    print_recent_exchanges
+    ;;
   *)
     print_block 'task_state' "$TASK_FILE"
     print_block 'continuation_capsule' "$CAPSULE_FILE"
@@ -98,3 +123,4 @@ case "$QUERY_TYPE" in
     print_block 'session_summary' "$SESSION_FILE"
     ;;
 esac
+print_block 'long_term_memory' "$MEMORY_FILE"

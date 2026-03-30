@@ -61,7 +61,21 @@ This project provides a minimal shared-session bridge that:
    - `OV_IDENTITY_MAP`
 4. Call `scripts/before-answer.sh` before reply generation.
 5. Call `scripts/after-answer.sh` after reply generation.
-6. Validate with a real two-channel continuation test.
+6. Optionally pass `exchange_id` and `exchange_json_file` into `scripts/after-answer.sh` to store semantic exchanges and regenerate continuation capsules.
+7. Validate with `scripts/demo.sh` or a real two-channel continuation test.
+
+## Verify It Actually Works
+
+Run the isolated demo with:
+
+```bash
+export OV_CONTEXT_ROOT="$(mktemp -d)"
+mkdir -p "$OV_CONTEXT_ROOT"/{sessions,tasks,capsules,exchanges,memory/long-term}
+export OV_IDENTITY_MAP="$PWD/examples/identity-map.demo.json"
+./scripts/demo.sh feishu demo-feishu-user cross-channel-default
+```
+
+If the final output shows `continuation_capsule`, `recent_exchanges`, `task_state`, and `session_summary`, the reference implementation is working.
 
 ## OpenClaw Skill Wrapper
 

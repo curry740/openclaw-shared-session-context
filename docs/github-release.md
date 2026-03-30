@@ -12,9 +12,10 @@ This release packages the first reusable version of the shared-session bridge us
 
 - protocol-level shared objects
 - OpenViking-backed reference scripts
-- OpenClaw integration notes
-- example identity map and object schemas
-- first-pass installation and rollout docs
+- semantic exchange writeback and continuation capsule regeneration
+- OpenClaw integration notes and thin skill wrapper
+- example identity maps and object payloads
+- installation, demo, hardening, and rollout docs
 
 ## Current limits
 

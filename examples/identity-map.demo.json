@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "users": {
+    "demo-user": {
+      "displayName": "Demo User",
+      "channels": {
+        "feishu": { "userId": "demo-feishu-user" },
+        "qqbot": { "userId": "demo-qq-user" }
+      }
+    }
+  }
+}
