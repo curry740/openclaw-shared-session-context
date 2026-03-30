@@ -1,23 +1,61 @@
 # OpenClaw Shared Session Context
 
-Reusable shared-session continuity for `OpenClaw` bots.
+A bridge layer between `OpenClaw` and `OpenViking` for cross-channel shared session continuity.
 
-This repository turns cross-channel conversation continuity into a reusable layer instead of a one-off personal workspace hack.
+This repository is not just an OpenClaw skill and not just a set of hook scripts.
+Its purpose is to connect:
+- `OpenClaw` as the orchestration and reply host
+- `OpenViking` as the shared state storage and retrieval backend
+- a reusable bridge layer that makes cross-channel continuity actually work
 
-## Problem
+## Architecture in One Sentence
+
+`OpenClaw` decides when to read and write. `OpenViking` stores and serves the shared objects. This repository defines the protocol and the bridge between them.
+
+## Why This Exists
 
 When one user talks to the same bot from different channels, context usually fractures:
 - each channel becomes its own isolated session
 - short continuation prompts like `continue` or `where were we` become weak
 - active task state drifts apart
 
-## Solution
+The bridge in this repository solves that by making multiple channels read from and write to the same shared state backend.
 
-This project provides a minimal shared-session bridge that:
-- maps channel identities into one `canonical_user`
-- reads shared context before answer generation
-- writes structured state back after answer generation
-- prefers compact state objects over full transcript replay
+## OpenViking Is Required
+
+In the current implementation, `OpenViking` is not optional.
+It is the backend that stores and retrieves the shared objects used for continuation:
+- `session_summary`
+- `task_state`
+- `continuation_capsule`
+- `recent_exchange`
+
+Without a working `OpenViking` backend, the current bridge does not work as designed.
+
+## What OpenClaw Does
+
+`OpenClaw` is responsible for:
+- receiving messages from chat channels
+- deciding when to call the bridge before answer generation
+- deciding when to call the bridge after answer generation
+- generating the actual reply with injected context
+
+## What OpenViking Does
+
+`OpenViking` is responsible for:
+- storing shared objects under one canonical user identity
+- serving those objects back across channel boundaries
+- acting as the shared continuity backend instead of per-channel local session memory
+
+## What This Repository Does
+
+This repository provides:
+- protocol-level object definitions
+- OpenViking-backed reference shell scripts
+- OpenClaw integration notes
+- example identity maps, config, summary, and exchange payloads
+- demo, rollout, and hardening docs
+- a thin OpenClaw skill wrapper under `skill/shared-session-context`
 
 ## Core Objects
 
@@ -30,15 +68,7 @@ This project provides a minimal shared-session bridge that:
 
 `continuation_capsule -> recent_exchanges -> task_state -> session_summary`
 
-## What This Repo Contains
-
-- protocol-level object definitions
-- OpenViking-backed reference shell scripts
-- OpenClaw integration notes
-- example identity map and config
-- rollout and packaging docs
-
-## Scope for v0.1.0
+## Current Scope
 
 - private chat continuation first
 - manual identity mapping first
@@ -50,19 +80,20 @@ This project provides a minimal shared-session bridge that:
 - full transcript sync
 - group chat sharing by default
 - automatic long-term memory extraction
-- hosted backend service
+- a hosted backend service
 
 ## Quick Start
 
-1. Clone this repository.
-2. Copy `examples/identity-map.json` and fill your channel user ids.
-3. Set:
+1. Make sure `OpenViking` is installed and working first.
+2. Clone this repository.
+3. Copy `examples/identity-map.json` and fill your channel user ids.
+4. Set:
    - `OV_CONTEXT_ROOT`
    - `OV_IDENTITY_MAP`
-4. Call `scripts/before-answer.sh` before reply generation.
-5. Call `scripts/after-answer.sh` after reply generation.
-6. Optionally pass `exchange_id` and `exchange_json_file` into `scripts/after-answer.sh` to store semantic exchanges and regenerate continuation capsules.
-7. Validate with `scripts/demo.sh` or a real two-channel continuation test.
+5. Call `scripts/before-answer.sh` before reply generation.
+6. Call `scripts/after-answer.sh` after reply generation.
+7. Optionally pass `exchange_id` and `exchange_json_file` into `scripts/after-answer.sh` to store semantic exchanges and regenerate continuation capsules.
+8. Validate with `scripts/demo.sh` or a real two-channel continuation test.
 
 ## Verify It Actually Works
 
@@ -75,22 +106,19 @@ export OV_IDENTITY_MAP="$PWD/examples/identity-map.demo.json"
 ./scripts/demo.sh feishu demo-feishu-user cross-channel-default
 ```
 
-If the final output shows `continuation_capsule`, `recent_exchanges`, `task_state`, and `session_summary`, the reference implementation is working.
+If the final output shows `continuation_capsule`, `recent_exchanges`, `task_state`, and `session_summary`, the bridge is working against a valid OpenViking-style resource tree.
 
 ## OpenClaw Skill Wrapper
 
-This repository is the reusable core.
-
-A thin OpenClaw skill wrapper is included under `skill/shared-session-context` and should stay thin:
-- bootstrap config
-- integration checklist
-- hook wiring guidance
-- operational validation
+A thin OpenClaw skill wrapper is included under `skill/shared-session-context`.
+It should stay thin and should not duplicate backend logic.
+The backend contract belongs to `OpenViking`, and the bridge contract belongs to this repository.
 
 ## Recommended Packaging Strategy
 
-- publish this repo as the protocol + reference implementation
-- publish the skill as the OpenClaw-facing wrapper
+- publish this repo as the bridge and reference implementation
+- keep OpenViking explicit in all setup and architecture docs
+- keep the skill as the OpenClaw-facing wrapper
 - version the skill against tagged releases of this repo
 
 ## License
