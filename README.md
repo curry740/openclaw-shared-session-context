@@ -54,7 +54,7 @@ This repository provides:
 - OpenViking-backed reference shell scripts
 - OpenClaw integration notes
 - example identity maps, config, summary, and exchange payloads
-- demo, rollout, and hardening docs
+- demo, verification, rollout, and hardening docs
 - a thin OpenClaw skill wrapper under `skill/shared-session-context`
 
 ## Core Objects
@@ -119,6 +119,11 @@ The backend contract belongs to `OpenViking`, and the bridge contract belongs to
 - publish this repo as the bridge and reference implementation
 - keep OpenViking explicit in all setup and architecture docs
 - keep the skill as the OpenClaw-facing wrapper
+- version the skill against tagged releases of this repo
+
+## License
+
+MIT
 - version the skill against tagged releases of this repo
 
 ## License

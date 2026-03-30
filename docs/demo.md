@@ -33,4 +33,4 @@ The final output should show:
 ## Why this matters
 
 This proves the repository can do more than explain the protocol.
-It proves the reference implementation can write and read a real continuation chain.
+It proves the reference implementation can write and read a real continuation chain against an OpenViking-style backend tree.

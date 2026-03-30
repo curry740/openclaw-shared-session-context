@@ -7,6 +7,7 @@ This repository is now a usable reference implementation, not just a protocol sk
 ## What is production-friendly already
 
 - identity resolution via explicit mapping
+- OpenViking-backed shared object layout and retrieval order
 - read prioritization across capsule, exchanges, task, and summary
 - structured writeback with unchanged/empty gating
 - thin OpenClaw skill wrapper included
