@@ -23,10 +23,10 @@ Run the prerequisite check:
 
 ## Step 3
 
-Run the isolated demo:
+Initialize the backend tree if needed and run the isolated demo:
 
 ```bash
-mkdir -p "$OV_CONTEXT_ROOT"/{sessions,tasks,capsules,exchanges,memory/long-term}
+./scripts/init-backend-tree.sh "$OV_CONTEXT_ROOT"
 ./scripts/demo.sh feishu demo-feishu-user cross-channel-default
 ```
 

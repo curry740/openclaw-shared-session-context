@@ -90,10 +90,12 @@ This repository provides:
 4. Set:
    - `OV_CONTEXT_ROOT`
    - `OV_IDENTITY_MAP`
-5. Call `scripts/before-answer.sh` before reply generation.
-6. Call `scripts/after-answer.sh` after reply generation.
-7. Optionally pass `exchange_id` and `exchange_json_file` into `scripts/after-answer.sh` to store semantic exchanges and regenerate continuation capsules.
-8. Validate with `scripts/demo.sh` or a real two-channel continuation test.
+5. Run `scripts/check-prereqs.sh`.
+6. If needed, initialize the backend tree with `scripts/init-backend-tree.sh`.
+7. Call `scripts/before-answer.sh` before reply generation.
+8. Call `scripts/after-answer.sh` after reply generation.
+9. Optionally pass `exchange_id` and `exchange_json_file` into `scripts/after-answer.sh` to store semantic exchanges and regenerate continuation capsules.
+10. Validate with `scripts/demo.sh` or a real two-channel continuation test.
 
 ## Verify It Actually Works
 
@@ -125,6 +127,11 @@ The backend contract belongs to `OpenViking`, and the bridge contract belongs to
 
 MIT
 - version the skill against tagged releases of this repo
+
+## License
+
+MIT
+ases of this repo
 
 ## License
 

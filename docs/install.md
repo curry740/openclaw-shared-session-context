@@ -63,6 +63,12 @@ scripts/before-answer.sh feishu YOUR_FEISHU_USER_ID "continue" your-topic
 
 Use the demo to validate the full read/write chain without needing your live production data first.
 
+If your resource tree is not prepared yet, initialize it with:
+
+```bash
+scripts/init-backend-tree.sh "$OV_CONTEXT_ROOT"
+```
+
 ## Integration Rule
 
 Do not patch your runtime core first.
