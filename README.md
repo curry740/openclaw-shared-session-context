@@ -107,6 +107,7 @@ Run the isolated demo with:
 export OV_CONTEXT_ROOT="$(mktemp -d)"
 mkdir -p "$OV_CONTEXT_ROOT"/{sessions,tasks,capsules,exchanges,memory/long-term}
 export OV_IDENTITY_MAP="$PWD/examples/identity-map.demo.json"
+./scripts/check-prereqs.sh
 ./scripts/demo.sh feishu demo-feishu-user cross-channel-default
 ```
 
@@ -125,15 +126,14 @@ The backend contract belongs to `OpenViking`, and the bridge contract belongs to
 - keep the skill as the OpenClaw-facing wrapper
 - version the skill against tagged releases of this repo
 
-## License
+## Additional Docs
 
-MIT
-- version the skill against tagged releases of this repo
-
-## License
-
-MIT
-ases of this repo
+- `docs/usage.md`
+- `docs/architecture-diagram.md`
+- `docs/quick-verification.md`
+- `docs/faq.md`
+- `docs/use-cases.md`
+- `docs/why-openviking.md`
 
 ## License
 

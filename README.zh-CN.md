@@ -135,6 +135,8 @@ export OV_IDENTITY_MAP="$PWD/examples/identity-map.demo.json"
 
 ## 更多文档
 
+- `docs/usage.md`
+- `docs/usage.zh-CN.md`
 - `docs/architecture-diagram.md`
 - `docs/quick-verification.md`
 - `docs/faq.md`
