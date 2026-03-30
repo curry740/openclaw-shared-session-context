@@ -26,7 +26,7 @@ scripts/resolve-identity.sh feishu YOUR_FEISHU_USER_ID
 5. Test context read:
 
 ```bash
-scripts/before-answer.sh feishu YOUR_FEISHU_USER_ID "继续" your-topic
+scripts/before-answer.sh feishu YOUR_FEISHU_USER_ID "continue" your-topic
 ```
 
 ## Integration

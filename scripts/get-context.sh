@@ -25,11 +25,11 @@ CAPSULE_FILE="${ROOT}/capsules/${CANONICAL_USER}/${TOPIC}/continuation-capsule.j
 
 query_type() {
   case "$QUERY" in
-    *继续*|*接着上次*|*接着做*) printf 'continuation' ;;
-    *聊到哪*|*上次说到哪*) printf 'recall-summary' ;;
-    *原话*|*原文*|*逐字*) printf 'recall-verbatim' ;;
-    *卡在哪*|*下一步*|*当前进度*) printf 'task-progress' ;;
-    *为什么*|*设计*|*架构*|*原理*) printf 'design-explanation' ;;
+    *continue*|*resume*|*pick up where we left off*) printf 'continuation' ;;
+    *where were we*|*what were we discussing*|*where did we stop*) printf 'recall-summary' ;;
+    *verbatim*|*exact words*|*what did you say exactly*) printf 'recall-verbatim' ;;
+    *blocked*|*next step*|*current progress*) printf 'task-progress' ;;
+    *why*|*design*|*architecture*|*principle*) printf 'design-explanation' ;;
     *) printf 'default' ;;
   esac
 }

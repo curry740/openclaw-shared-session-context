@@ -40,12 +40,12 @@ Expected result:
 
 ## 4. Smoke test
 
-Use a real continuation phrase such as `继续` from another channel.
+Use a real continuation phrase such as `continue` from another channel.
 
 Then run:
 
 ```bash
-scripts/smoke-test.sh <channel> <channel_user_id> "继续" <topic>
+scripts/smoke-test.sh <channel> <channel_user_id> "continue" <topic>
 ```
 
 ## 5. Operational rule

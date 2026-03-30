@@ -1,15 +1,15 @@
 {
   "task_id": "cross-channel-default",
-  "title": "跨渠道连续会话",
+  "title": "Cross-channel shared session continuity",
   "status": "in_progress",
-  "current_goal": "让多个私聊渠道共享同一工作上下文",
+  "current_goal": "Keep multiple private-chat channels on the same working context",
   "latest_progress": [
-    "已完成共享上下文最小读取链路",
-    "已完成结构化写回"
+    "Completed the minimal shared-context read path",
+    "Completed structured writeback"
   ],
   "blockers": [
-    "旧 summary 风格不统一"
+    "Legacy summary style is still inconsistent"
   ],
-  "next_step": "清洗 live summary 与 capsule",
+  "next_step": "Clean live summaries and capsules",
   "updated_at": "2026-03-30T00:00:00+08:00"
 }
