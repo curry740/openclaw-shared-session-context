@@ -67,7 +67,7 @@ This project provides a minimal shared-session bridge that:
 
 This repository is the reusable core.
 
-A thin OpenClaw skill wrapper lives alongside it and should stay thin:
+A thin OpenClaw skill wrapper is included under `skill/shared-session-context` and should stay thin:
 - bootstrap config
 - integration checklist
 - hook wiring guidance
@@ -78,6 +78,11 @@ A thin OpenClaw skill wrapper lives alongside it and should stay thin:
 - publish this repo as the protocol + reference implementation
 - publish the skill as the OpenClaw-facing wrapper
 - version the skill against tagged releases of this repo
+
+## License
+
+MIT
+releases of this repo
 
 ## License
 
