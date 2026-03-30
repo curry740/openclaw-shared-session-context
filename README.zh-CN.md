@@ -97,6 +97,8 @@
 9. 如需写入 semantic exchange 与 continuation capsule，可给 `scripts/after-answer.sh` 额外传入 `exchange_id` 与 `exchange_json_file`。
 10. 用 `scripts/demo.sh` 或真实双渠道续接场景验证。
 
+你也可以直接把这个 GitHub 仓库链接发给你自己的 `OpenClaw`，让它读取并使用这套实现。本仓库的结构已经按“可被 OpenClaw 直接消费”来组织。详见 `docs/openclaw-direct-consumption.md`。
+
 ## 如何验证它真的可用
 
 运行隔离 demo：

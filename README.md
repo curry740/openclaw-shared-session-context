@@ -99,6 +99,8 @@ This repository provides:
 9. Optionally pass `exchange_id` and `exchange_json_file` into `scripts/after-answer.sh` to store semantic exchanges and regenerate continuation capsules.
 10. Validate with `scripts/demo.sh` or a real two-channel continuation test.
 
+You can also send this GitHub repository directly to your own `OpenClaw` instance and ask it to read and use the implementation. This repository is structured to be directly consumable by OpenClaw agents. See `docs/openclaw-direct-consumption.md`.
+
 ## Verify It Actually Works
 
 Run the isolated demo with:
@@ -129,6 +131,7 @@ The backend contract belongs to `OpenViking`, and the bridge contract belongs to
 ## Additional Docs
 
 - `docs/usage.md`
+- `docs/openclaw-direct-consumption.md`
 - `docs/architecture-diagram.md`
 - `docs/quick-verification.md`
 - `docs/faq.md`
