@@ -139,11 +139,15 @@ export OV_IDENTITY_MAP="$PWD/examples/identity-map.demo.json"
 
 - `docs/usage.md`
 - `docs/usage.zh-CN.md`
+- `docs/openclaw-direct-consumption.md`
+- `docs/agent-checklist.md`
 - `docs/architecture-diagram.md`
 - `docs/quick-verification.md`
 - `docs/faq.md`
 - `docs/use-cases.md`
 - `docs/why-openviking.md`
+- `docs/repository-maturity.md`
+- `docs/release-strategy.md`
 
 ## 许可证
 

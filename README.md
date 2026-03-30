@@ -132,11 +132,14 @@ The backend contract belongs to `OpenViking`, and the bridge contract belongs to
 
 - `docs/usage.md`
 - `docs/openclaw-direct-consumption.md`
+- `docs/agent-checklist.md`
 - `docs/architecture-diagram.md`
 - `docs/quick-verification.md`
 - `docs/faq.md`
 - `docs/use-cases.md`
 - `docs/why-openviking.md`
+- `docs/repository-maturity.md`
+- `docs/release-strategy.md`
 
 ## License
 
