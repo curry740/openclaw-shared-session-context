@@ -23,6 +23,15 @@ When one user talks to the same bot from different channels, context usually fra
 
 The bridge in this repository solves that by making multiple channels read from and write to the same shared state backend.
 
+## Why Use This Instead of Simpler Approaches
+
+| Approach | What it does well | Where it breaks | Why this bridge exists |
+| --- | --- | --- | --- |
+| Per-channel local session memory | simple, no extra backend | continuity breaks across Feishu / QQ / Telegram / Discord | one canonical user can continue from another channel |
+| “Just write a skill” | easy to wire into one agent host | logic, storage contract, and deployment assumptions get mixed together | keeps the OpenClaw-facing skill thin and the backend contract explicit |
+| Full transcript sync | maximum raw recall | expensive, noisy, hard to control, easy to over-share | prefers compact structured objects with clear read priority |
+| Long-term memory extraction | useful for durable preferences and facts | weak for active task continuation right now | focuses first on short-horizon cross-channel continuity |
+
 ## OpenViking Is Required
 
 In the current implementation, `OpenViking` is not optional.
@@ -76,6 +85,25 @@ This repository provides:
 - manual identity mapping first
 - OpenViking backend first
 - OpenClaw hook integration first
+
+## Compatibility
+
+| Component | Current expectation |
+| --- | --- |
+| OpenClaw | able to call `before-answer` and `after-answer` bridge scripts |
+| OpenViking | exposes an OpenViking-style resource tree under `OV_CONTEXT_ROOT` |
+| Shell runtime | `bash` |
+| Python runtime | `python3` |
+| Identity mapping | explicit file-based mapping via `OV_IDENTITY_MAP` |
+| Channels | private chat continuation first |
+
+## Failure Modes You Should Expect
+
+- wrong identity mapping merges different channel users into one canonical user
+- missing `OV_CONTEXT_ROOT` or `OV_IDENTITY_MAP` prevents the bridge from resolving shared state
+- backend tree exists but objects are missing, so continuation falls back to partial context
+- exchange writeback is skipped or malformed, so `recent_exchanges` and `continuation_capsule` become weak
+- trying to start with multi-user or group-chat scope makes verification noisy and misleading
 
 ## Not Included
 
@@ -135,6 +163,8 @@ The backend contract belongs to `OpenViking`, and the bridge contract belongs to
 
 - `docs/usage.md`
 - `docs/quick-verification.md`
+- `docs/compatibility.md`
+- `docs/failure-modes.md`
 - `docs/architecture.md`
 - `docs/architecture-diagram.md`
 - `docs/openclaw-direct-consumption.md`
