@@ -134,6 +134,8 @@ You can also send this GitHub repository directly to your own `OpenClaw` instanc
 
 ## Verify It Actually Works
 
+For a real terminal proof, see `docs/demo-transcript.md`.
+
 Run the isolated demo with:
 
 ```bash
@@ -163,6 +165,7 @@ The backend contract belongs to `OpenViking`, and the bridge contract belongs to
 
 - `docs/usage.md`
 - `docs/quick-verification.md`
+- `docs/demo-transcript.md`
 - `docs/compatibility.md`
 - `docs/failure-modes.md`
 - `docs/architecture.md`
