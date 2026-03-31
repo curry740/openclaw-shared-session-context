@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.2
+
+- remove overlapping install, configuration, demo, and release-draft docs to reduce navigation noise
+- tighten the README quick-start path and make verification more front-loaded
+- add a baseline GitHub Actions CI workflow for bash syntax and isolated demo smoke testing
+- add a SECURITY policy focused on identity mapping, shared-state isolation, and deployment posture
+- add README positioning that explains when to use this bridge instead of simpler memory patterns
+- add compatibility and failure-mode docs to make deployment boundaries explicit
+- add a real cross-channel terminal transcript artifact showing `feishu -> write` and `qqbot -> read`
+
 ## 0.1.1
 
 - upgrade the reference scripts from minimal placeholders into a usable read/write chain
