@@ -1,0 +1,31 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate bash syntax
+        run: |
+          set -euo pipefail
+          while IFS= read -r script; do
+            bash -n "$script"
+          done < <(find scripts skill -type f \( -name '*.sh' -o -name '*.bash' \))
+
+      - name: Run isolated demo smoke test
+        run: |
+          set -euo pipefail
+          export OV_CONTEXT_ROOT="$(mktemp -d)"
+          mkdir -p "$OV_CONTEXT_ROOT"/{sessions,tasks,capsules,exchanges,memory/long-term}
+          export OV_IDENTITY_MAP="$PWD/examples/identity-map.demo.json"
+          ./scripts/check-prereqs.sh
+          ./scripts/demo.sh feishu demo-feishu-user cross-channel-default >/tmp/demo.out
+          grep -q 'continuation_capsule' /tmp/demo.out
+          grep -q 'recent_exchanges' /tmp/demo.out
+          grep -q 'task_state' /tmp/demo.out
+          grep -q 'session_summary' /tmp/demo.out

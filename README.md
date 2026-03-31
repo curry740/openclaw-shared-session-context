@@ -86,18 +86,21 @@ This repository provides:
 
 ## Quick Start
 
-1. Make sure `OpenViking` is installed and working first.
-2. Clone this repository.
-3. Copy `examples/identity-map.json` and fill your channel user ids.
-4. Set:
+1. Clone this repository.
+2. Set:
    - `OV_CONTEXT_ROOT`
    - `OV_IDENTITY_MAP`
-5. Run `scripts/check-prereqs.sh`.
-6. If needed, initialize the backend tree with `scripts/init-backend-tree.sh`.
-7. Call `scripts/before-answer.sh` before reply generation.
-8. Call `scripts/after-answer.sh` after reply generation.
-9. Optionally pass `exchange_id` and `exchange_json_file` into `scripts/after-answer.sh` to store semantic exchanges and regenerate continuation capsules.
-10. Validate with `scripts/demo.sh` or a real two-channel continuation test.
+3. Run `scripts/check-prereqs.sh`.
+4. If needed, initialize the backend tree with `scripts/init-backend-tree.sh`.
+5. Run `scripts/demo.sh feishu demo-feishu-user cross-channel-default`.
+6. Confirm the output includes:
+   - `continuation_capsule`
+   - `recent_exchanges`
+   - `task_state`
+   - `session_summary`
+7. Then wire `scripts/before-answer.sh` and `scripts/after-answer.sh` into your actual `OpenClaw` flow.
+
+For the shortest install path, see `docs/usage.md`.
 
 You can also send this GitHub repository directly to your own `OpenClaw` instance and ask it to read and use the implementation. This repository is structured to be directly consumable by OpenClaw agents. See `docs/openclaw-direct-consumption.md`.
 
@@ -131,15 +134,18 @@ The backend contract belongs to `OpenViking`, and the bridge contract belongs to
 ## Additional Docs
 
 - `docs/usage.md`
-- `docs/openclaw-direct-consumption.md`
-- `docs/agent-checklist.md`
-- `docs/architecture-diagram.md`
 - `docs/quick-verification.md`
+- `docs/architecture.md`
+- `docs/architecture-diagram.md`
+- `docs/openclaw-direct-consumption.md`
+- `docs/openclaw-integration-walkthrough.md`
+- `docs/agent-checklist.md`
 - `docs/faq.md`
 - `docs/use-cases.md`
 - `docs/why-openviking.md`
-- `docs/repository-maturity.md`
+- `docs/production-hardening.md`
 - `docs/release-strategy.md`
+- `docs/repository-maturity.md`
 
 ## License
 

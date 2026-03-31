@@ -126,8 +126,8 @@ Do not start with:
 
 ## Related docs
 
-- `docs/install.md`
 - `docs/quick-verification.md`
-- `docs/demo.md`
 - `docs/openclaw-integration-walkthrough.md`
+- `docs/architecture.md`
 - `docs/why-openviking.md`
+- `docs/production-hardening.md`

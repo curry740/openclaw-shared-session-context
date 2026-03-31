@@ -127,8 +127,8 @@ identity map 的作用，是把多个渠道身份映射到同一个 `canonical_u
 
 ## 相关文档
 
-- `docs/install.md`
 - `docs/quick-verification.md`
-- `docs/demo.md`
 - `docs/openclaw-integration-walkthrough.md`
+- `docs/architecture.md`
 - `docs/why-openviking.md`
+- `docs/production-hardening.md`
